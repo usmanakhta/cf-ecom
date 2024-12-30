@@ -10,11 +10,13 @@ import Slider from "../Homeslider/Slider";
 import Slider2 from "../Homeslider2/Slider2";
 import Slider3 from "../Homeslider3/Slider3";
 import Slider4 from "../Homeslider4/Slider4";
+import Cards from "../Cards/Cards";
+import Slider5 from "../Men's Fashoin Slider-5/Slider5";
 
 function Home() {
   return (
     <>
-      <div className="bg-[#ececec]">
+      <div className="bg-[#ececec] pb-10">
         <div className="flex flex-col lg:flex-row justify-around py-5">
           {/* Main Swiper Section */}
           <div className="w-full lg:w-[60%]">
@@ -121,6 +123,8 @@ function Home() {
         </div>
 
         <Slider4 />
+        <Cards />
+        <Slider5 />
       </div>
     </>
   );

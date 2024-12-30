@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import XIcon from "@mui/icons-material/X";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -10,11 +10,35 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 
 function Navbar() {
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => {
+    setIsDropdownVisible((prev) => !prev);
+  };
+
+  // Close the dropdown when clicking outside
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setIsDropdownVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
   return (
     <>
       {/* Top Banner */}
       <div className="hidden sm:block h-[3rem] w-full bg-[#1d284f] px-5">
-
         <div className="flex items-center justify-between h-[3rem]">
           {/* Left Section */}
           <div className="flex items-center justify-start gap-3 w-full sm:w-[50%]">
@@ -45,7 +69,10 @@ function Navbar() {
         </div>
 
         {/* Search Bar */}
-        <div className="h-[3rem] bg-[#ececec] flex items-center gap-2 rounded-lg px-2 sm:px-4 sm:w-[55%]">
+        <div
+          ref={dropdownRef}
+          className="h-[3rem] bg-[#ececec] flex items-center gap-2 rounded-lg px-2 sm:px-4 sm:w-[55%] relative"
+        >
           <SearchIcon className="text-gray-500 text-sm sm:text-base" />
           <input
             type="text"
@@ -56,9 +83,41 @@ function Navbar() {
           <CollectionsIcon className="text-gray-500 text-sm sm:text-base" />
           <div
             className="bg-transparent hidden sm:block text-gray-500 text-xs sm:text-sm p-1 py-1 border-l-gray-600 border-l-2 cursor-pointer"
+            onClick={toggleDropdown}
           >
-          <p>All Categories <KeyboardArrowDownIcon/> </p>
+            <p>
+              All Categories <KeyboardArrowDownIcon />
+            </p>
           </div>
+
+          {/* Dropdown */}
+          {isDropdownVisible && (
+            <div
+              className="absolute top-[2rem] right-0 sm:left-[570px] w-[180px] bg-white rounded-lg shadow-lg py-3 transition-transform duration-300 ease-in-out"
+              style={{ zIndex: 1000 }}
+            >
+              <ul className="space-y-3">
+                <li className="hover:bg-gray-100 text-gray-700 cursor-pointer px-4 py-1">
+                  Categories
+                </li>
+                <li className="hover:bg-gray-100 text-gray-700 cursor-pointer px-4 py-1">
+                  Car
+                </li>
+                <li className="hover:bg-gray-100 text-gray-700 cursor-pointer px-4 py-1">
+                  Cloth
+                </li>
+                <li className="hover:bg-gray-100 text-gray-700 cursor-pointer px-4 py-1">
+                  Electronics
+                </li>
+                <li className="hover:bg-gray-100 text-gray-700 cursor-pointer px-4 py-1">
+                  Toys
+                </li>
+                <li className="hover:bg-gray-100 text-gray-700 cursor-pointer px-4 py-1">
+                  Shoes
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* Icons */}

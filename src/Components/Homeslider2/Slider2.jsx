@@ -36,7 +36,7 @@ function Slider2() {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="h-[30vh] md:h-[33vh] w-full bg-[#e1d2d2] rounded-md p-3 md:p-4">
+          <div className="h-[30vh] md:h-[33vh] w-full bg-[#e1d2d2] rounded-md p-3 md:p-2">
             <p className="text-sm md:text-base">NEW ARRIVALS</p>
             <p className="text-lg md:text-xl font-semibold">SUMMER</p>
             <p className="text-sm md:text-lg font-medium text-gray-600">

@@ -16,5 +16,17 @@
   }
   .clippath{
     clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+  } 
+  ul li .page{
+    display: none;
+  }
+  ul li:hover .page{
+    display: block;
+  }
+  ul li .reels{
+    display: none;
+  }
+  ul li:hover .reels{
+    display: block;
   }
   
